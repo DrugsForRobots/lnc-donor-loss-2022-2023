@@ -49,7 +49,8 @@
   .dd .tiles { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
   .dd .card { background: var(--panel); border-radius: 16px; padding: clamp(1rem, 2.5vw, 2rem); display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
   .dd .card .card { background: var(--navy); }
-  .dd .tile .num { font-family: var(--serif); font-weight: 700; font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.1; color: var(--gold); font-variant-numeric: tabular-nums; min-height: 1.1em; }
+  .dd .tile .num { font-family: var(--serif); font-weight: 700; font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.1; color: var(--gold); font-variant-numeric: lining-nums proportional-nums; min-height: 1.1em; white-space: nowrap; overflow-wrap: normal; }
+  .dd .nw { white-space: nowrap; }
   .dd .tile .label { font-size: 1rem; color: var(--mist); }
   .dd .grid2 { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
   .dd .chart { position: relative; min-height: 300px; }
@@ -128,13 +129,13 @@ window.dash = (function () {
 <div class="dd">
   <header style="display:grid;gap:1rem">
     <p class="eyebrow">The LNC record</p>
-    <h1 id="top">LNC Donor Drop-Off, 2021–2024</h1>
+    <h1 id="top">LNC Donor <span class="nw">Drop-Off,</span> <span class="nw">2021–2024</span></h1>
     <div class="rule"></div>
     <p class="lede">Individual giving to the LNC fell by <b data-draw="k-drop" data-source="kpi" data-field="drop">—</b> from 2022 to 2023. <b data-draw="k-share" data-source="kpi" data-field="itemShare">—</b> of it was gifts from donors who gave over $200 a year. Of the <b data-draw="k-base" data-source="kpi" data-field="base">—</b> people who gave over $200 in 2022, <b data-draw="k-lost" data-source="kpi" data-field="lost">—</b> did not do so again in 2023, and <b data-draw="k-back" data-source="kpi" data-field="back">—</b> of them came back in 2024.</p>
   </header>
 
   <section class="tiles" aria-label="Headline figures">
-    <div class="card tile"><div class="num" data-draw="k-drop" data-source="kpi" data-field="drop">—</div><div class="label">Drop In Individual Giving, 2022 To 2023</div></div>
+    <div class="card tile"><div class="num" data-draw="k-dropk" data-source="kpi" data-field="drop">—</div><div class="label">Drop In Individual Giving, 2022 To 2023</div></div>
     <div class="card tile"><div class="num" data-draw="k-share" data-source="kpi" data-field="itemShare">—</div><div class="label">Of The Drop From Donors Who Gave Over $200</div></div>
     <div class="card tile"><div class="num" data-draw="k-lost" data-source="kpi" data-field="lost">—</div><div class="label">2022 Donors Over $200 Not Back In 2023</div></div>
     <div class="card tile"><div class="num" data-draw="k-back" data-source="kpi" data-field="back">—</div><div class="label">Of Those, Back Over $200 In 2024</div></div>
@@ -330,6 +331,7 @@ window.dash = (function () {
   const one = (id) => { const d = ok(id); return d && d.length ? d[0] : null; };
   const fill = (name, id, f) => dash.draw(name, (el) => { const k = one(id); el.textContent = k ? f(k) : '—'; });
   fill('k-drop', 'kpi', (k) => money(k.drop));
+  fill('k-dropk', 'kpi', (k) => '$' + d3.format(',.0f')(k.drop / 1000) + 'K');
   fill('k-share', 'kpi', (k) => pct(k.itemShare));
   fill('k-base', 'kpi', (k) => num(k.base));
   fill('k-lost', 'kpi', (k) => num(k.lost));
@@ -353,7 +355,7 @@ window.dash = (function () {
     const y = d3.scaleLinear([0, d3.max(rows, (r) => r.individual)], [h - m.b, m.t]).nice();
     const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).style('font-family', "'Public Sans', Arial, sans-serif");
     svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y).attr('y2', y).attr('stroke', GRID);
-    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => d3.format('$.1s')(v).replace('G', 'B')).tickSize(0)).attr('font-size', null).attr('font-family', null).call((g) => g.select('.domain').remove()).selectAll('text').attr('fill', MIST).attr('font-size', 11);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => (v === 0 ? '$0' : d3.format('$.2~s')(v).replace('G', 'B'))).tickSize(0)).attr('font-size', null).attr('font-family', null).call((g) => g.select('.domain').remove()).selectAll('text').attr('fill', MIST).attr('font-size', 11);
     const xa = svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).tickSize(0)).attr('font-size', null).attr('font-family', null);
     xa.select('.domain').attr('stroke', MIST);
     xa.selectAll('text').attr('fill', MIST).attr('font-size', 11).attr('dy', '1.1em');
