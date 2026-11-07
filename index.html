@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LNC Donor Drop-Off, 2021–2024</title>
+<meta name="description" content="How individual giving to the Libertarian National Committee fell from 2022 to 2023, which donors left and when, and how the move from Raiser's Edge to CiviCRM unfolded, from the LNC's own FEC filings and meeting records.">
+<link rel="canonical" href="https://drugsforrobots.github.io/lnc-donor-loss-2022-2023/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LNC Donor Drop-Off, 2021–2024">
+<meta property="og:title" content="LNC Donor Drop-Off, 2021–2024">
+<meta property="og:description" content="How individual giving to the Libertarian National Committee fell from 2022 to 2023, which donors left and when, and how the move from Raiser's Edge to CiviCRM unfolded, from the LNC's own FEC filings and meeting records.">
+<meta property="og:url" content="https://drugsforrobots.github.io/lnc-donor-loss-2022-2023/">
+<meta property="og:image" content="https://drugsforrobots.github.io/lnc-donor-loss-2022-2023/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LNC Donor Drop-Off: individual giving fell $763K from 2022 to 2023">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LNC Donor Drop-Off, 2021–2024">
+<meta name="twitter:description" content="How individual giving to the Libertarian National Committee fell from 2022 to 2023, which donors left and when, and how the move from Raiser's Edge to CiviCRM unfolded, from the LNC's own FEC filings and meeting records.">
+<meta name="twitter:image" content="https://drugsforrobots.github.io/lnc-donor-loss-2022-2023/preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Public+Sans:ital,wght@0,400..700;1,400&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<style>
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); color-scheme: dark; }
+  html { background: #0F1A30; }
+  body { margin: 0; background: #0F1A30; padding-block: 24px 48px;
+          padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  #dash-root { max-width: 72rem; margin-inline: auto; }
+  img { max-width: 100%; } [hidden] { display: none !important; }
+</style>
+<style>
+  .dd {
+    --deep: #0F1A30; --navy: #13213C; --panel: #1C2D4D; --cream: #F5F1E8; --mist: #C5CFDF; --dim: #A3AFC4; --gold: #E2B13C; --slate: #3A4D70; --warn: #E8875A; --line: rgba(197, 207, 223, 0.16);
+    --serif: 'Libre Baskerville', Georgia, serif; --sans: 'Public Sans', Arial, sans-serif;
+    display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); font-family: var(--sans); color: var(--cream); background: var(--navy);
+    border-radius: 16px; padding: clamp(1.25rem, 5vw, 4rem); line-height: 1.4; color-scheme: dark;
+  }
+  .dd h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2rem, 5vw, 3.75rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+  .dd h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.25rem, 2.4vw, 1.75rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+  .dd p { margin: 0; max-width: 70ch; }
+  .dd .eyebrow { font-size: 0.875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+  .dd .rule { width: 6rem; height: 4px; background: var(--gold); }
+  .dd .lede { font-size: clamp(1.05rem, 1.8vw, 1.35rem); color: var(--mist); }
+  .dd .lede b, .dd .note b { font-weight: 700; color: var(--cream); }
+  .dd .note { font-size: 0.9rem; color: var(--mist); }
+  .dd .fine { font-size: 0.85rem; color: var(--dim); }
+  .dd .tiles { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+  .dd .card { background: var(--panel); border-radius: 16px; padding: clamp(1rem, 2.5vw, 2rem); display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+  .dd .card .card { background: var(--navy); }
+  .dd .tile .num { font-family: var(--serif); font-weight: 700; font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1.1; color: var(--gold); font-variant-numeric: tabular-nums; min-height: 1.1em; }
+  .dd .tile .label { font-size: 1rem; color: var(--mist); }
+  .dd .grid2 { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); }
+  .dd .chart { position: relative; min-height: 300px; }
+  .dd .tip { position: absolute; pointer-events: none; background: var(--deep); border: 1px solid var(--gold); border-radius: 8px; padding: 0.4rem 0.6rem; font-size: 0.85rem; color: var(--cream); white-space: nowrap; z-index: 2; }
+  .dd .tip .t { color: var(--gold); font-weight: 600; }
+  .dd .scroll { overflow-x: auto; max-width: 100%; }
+  .dd .grid2 > * { min-width: 0; }
+  .dd a { color: var(--gold); text-underline-offset: 2px; }
+  .dd blockquote cite a { color: var(--gold); }
+  .dd .tl { display: grid; gap: 0; position: relative; }
+  .dd .tl .ev.context .when { color: var(--mist); }
+  .dd .tl .ev { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.4rem 1rem; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+  .dd .tl .when { font-family: var(--serif); font-weight: 700; color: var(--gold); font-size: 1rem; }
+  .dd .tl .what { display: grid; gap: 0.45rem; min-width: 0; }
+  .dd .tl h3 { font-size: 1.05rem; font-weight: 700; margin: 0; }
+  .dd .people { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .dd .chip { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--deep); color: var(--mist); }
+  @media (max-width: 40rem) { .dd .tl .ev { grid-template-columns: 1fr; } }
+  .dd table { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; color: var(--cream); }
+  .dd th { white-space: normal; text-align: left; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: var(--panel); padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--gold); vertical-align: bottom; }
+  .dd td { padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .dd td.n, .dd th.n { text-align: right; white-space: nowrap; }
+  .dd td.bad { color: var(--warn); }
+  .dd td.good { color: var(--gold); }
+  .dd .bar { display: inline-block; height: 0.55rem; border-radius: 2px; background: var(--slate); vertical-align: middle; margin-right: 0.35rem; }
+  .dd .bar.hot { background: var(--gold); }
+  .dd .key { display: flex; gap: 0.5rem 1rem; flex-wrap: wrap; font-size: 0.9rem; color: var(--mist); }
+  .dd .sw { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 2px; vertical-align: -1px; margin-right: 0.35rem; }
+  .dd .sw.gold { background: var(--gold); } .dd .sw.slate { background: var(--slate); }
+  .dd blockquote { margin: 0; padding: 0.8rem 1rem; background: var(--deep); border-radius: 8px; display: grid; gap: 0.35rem; }
+  .dd blockquote p { font-family: var(--serif); font-style: italic; font-size: 0.98rem; color: var(--cream); }
+  .dd blockquote cite { font-style: normal; font-size: 0.82rem; color: var(--dim); }
+  .dd details { background: var(--panel); border-radius: 12px; padding: 1rem 1.25rem; }
+  .dd summary { font-family: var(--serif); font-weight: 700; font-size: 1.1rem; cursor: pointer; }
+  .dd details ul { margin: 0.75rem 0 0; padding-left: 1.1rem; display: grid; gap: 0.5rem; color: var(--mist); font-size: 0.9rem; max-width: 75ch; }
+  .dd details li b { color: var(--cream); }
+  .dd [data-dash-source-state=empty] { color: transparent; }
+  .dd [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+</head>
+<body>
+<script>window.__DASH_DATA__ = {"fec_years": [{"year": "2016", "individual": 2588070.47, "itemized": 1282788.04, "unitemized": 1305282.43, "reports": 12, "through": "2016-12-31", "partial": false, "itemized_donors": null}, {"year": "2017", "individual": 1575710.29, "itemized": 787295.07, "unitemized": 788415.22, "reports": 12, "through": "2017-12-31", "partial": false, "itemized_donors": null}, {"year": "2018", "individual": 1744102.29, "itemized": 918847.25, "unitemized": 825255.04, "reports": 12, "through": "2018-12-31", "partial": false, "itemized_donors": null}, {"year": "2019", "individual": 1668877.59, "itemized": 862429.25, "unitemized": 806448.34, "reports": 12, "through": "2019-12-31", "partial": false, "itemized_donors": null}, {"year": "2020", "individual": 2170484.8, "itemized": 1063913.67, "unitemized": 1106571.13, "reports": 12, "through": "2020-12-31", "partial": false, "itemized_donors": null}, {"year": "2021", "individual": 2085608.92, "itemized": 1112163.48, "unitemized": 973445.44, "reports": 12, "through": "2021-12-31", "partial": false, "itemized_donors": 1989}, {"year": "2022", "individual": 1975342.12, "itemized": 1050659.3, "unitemized": 924682.82, "reports": 12, "through": "2022-12-31", "partial": false, "itemized_donors": 2071}, {"year": "2023", "individual": 1212518.36, "itemized": 500395.82, "unitemized": 712122.54, "reports": 12, "through": "2023-12-31", "partial": false, "itemized_donors": 1272}, {"year": "2024", "individual": 1153708.46, "itemized": 594548.07, "unitemized": 559160.39, "reports": 12, "through": "2024-12-31", "partial": false, "itemized_donors": 1379}, {"year": "2025", "individual": 808342.24, "itemized": 394075.49, "unitemized": 414266.75, "reports": 12, "through": "2025-12-31", "partial": false, "itemized_donors": null}, {"year": "2026", "individual": 774079.02, "itemized": 444212.58, "unitemized": 329866.44, "reports": 10, "through": "2026-10-14", "partial": true, "itemized_donors": null}], "retention": [{"from": "2021", "to": "2022", "donors": 1989, "kept": 963, "lost": 1026, "lost_gave": 550035.85, "kept_gave_before": 562127.63, "kept_gave_after": 477228.37, "new": 1108, "new_gave": 573430.93, "transition": "2021 to 2022"}, {"from": "2022", "to": "2023", "donors": 2071, "kept": 727, "lost": 1344, "lost_gave": 678968.07, "kept_gave_before": 371691.23, "kept_gave_after": 319959.57, "new": 545, "new_gave": 180436.25, "transition": "2022 to 2023"}, {"from": "2023", "to": "2024", "donors": 1272, "kept": 710, "lost": 562, "lost_gave": 250054.65, "kept_gave_before": 250341.17, "kept_gave_after": 269475.13, "new": 669, "new_gave": 308551.46, "transition": "2023 to 2024"}], "status_2022_2023": [{"status": "stopped (not itemized in 2023)", "donors": 1344, "gave_2022": 678968.07, "gave_2023": 0.0}, {"status": "cut by half or more", "donors": 108, "gave_2022": 128484.87, "gave_2023": 32938.52}, {"status": "about the same", "donors": 483, "gave_2022": 214447.7, "gave_2023": 207514.99}, {"status": "raised by half or more", "donors": 136, "gave_2022": 28758.66, "gave_2023": 79506.06}, {"status": "new in 2023", "donors": 545, "gave_2022": 0.0, "gave_2023": 180436.25}], "bands_2022": [{"band": "$200–$499", "donors": 1319, "stopped": 870, "gave_2022": 386798.0, "gave_2023": 155958.46, "came_back_2024": 108}, {"band": "$500–$999", "donors": 435, "stopped": 252, "gave_2022": 266741.88, "gave_2023": 104866.47, "came_back_2024": 27}, {"band": "$1,000–$2,499", "donors": 289, "stopped": 207, "gave_2022": 425242.04, "gave_2023": 83091.42, "came_back_2024": 27}, {"band": "$2,500–$4,999", "donors": 20, "stopped": 11, "gave_2022": 60090.51, "gave_2023": 14314.62, "came_back_2024": 2}, {"band": "$5,000 and up", "donors": 8, "stopped": 4, "gave_2022": 98611.0, "gave_2023": 53432.16, "came_back_2024": 1}], "top_2022": [{"top": 10, "gave_2022": 106719.0, "gave_2023": 55031.36, "stopped": 4, "group": "Top 10"}, {"top": 25, "gave_2022": 150658.56, "gave_2023": 64510.78, "stopped": 13, "group": "Top 25"}, {"top": 50, "gave_2022": 205725.26, "gave_2023": 80839.93, "stopped": 29, "group": "Top 50"}, {"top": 100, "gave_2022": 293030.5, "gave_2023": 94671.62, "stopped": 64, "group": "Top 100"}], "left_by_month": [{"month": "2022-01", "donors": 52}, {"month": "2022-02", "donors": 32}, {"month": "2022-03", "donors": 67}, {"month": "2022-04", "donors": 99}, {"month": "2022-05", "donors": 272}, {"month": "2022-06", "donors": 105}, {"month": "2022-07", "donors": 68}, {"month": "2022-08", "donors": 49}, {"month": "2022-09", "donors": 68}, {"month": "2022-10", "donors": 150}, {"month": "2022-11", "donors": 118}, {"month": "2022-12", "donors": 264}], "comeback": [{"stopped": 1344, "back_2024": 165, "back_gave_2024": 82849.42, "monthly_donors": 386, "monthly_stopped": 174, "monthly_gave_2022": 271833.7, "monthly_gave_2023": 115784.41}], "matching": [{"name_and_zip": 4234, "donors": 4027, "joined_moves": 207}], "over200": [{"year": "2021", "donors": 1987, "gave": 1348605.92}, {"year": "2022", "donors": 2069, "gave": 1237437.83}, {"year": "2023", "donors": 1270, "gave": 654874.7}, {"year": "2024", "donors": 1379, "gave": 810546.81}], "non_individual": [{"date": "2024-01-22", "entity_type": "ORG", "name": "Twitter", "amount": 144.61, "description": "Vednor Offset", "pdf": "https://docquery.fec.gov/pdf/020/202402209619964020/202402209619964020.pdf"}, {"date": "2024-04-01", "entity_type": "ORG", "name": "Twitter", "amount": 185.68, "description": "Contribution", "pdf": "https://docquery.fec.gov/pdf/342/202407209665549342/202407209665549342.pdf"}, {"date": "2024-04-15", "entity_type": "ORG", "name": "Twitter", "amount": 190.38, "description": "Contribution", "pdf": "https://docquery.fec.gov/pdf/342/202407209665549342/202407209665549342.pdf"}, {"date": "2024-04-29", "entity_type": "ORG", "name": "Twitter", "amount": 176.85, "description": "Contribution", "pdf": "https://docquery.fec.gov/pdf/342/202407209665549342/202407209665549342.pdf"}, {"date": "2024-05-03", "entity_type": "ORG", "name": "Freedom Calls LLC", "amount": 4000.0, "description": "Vendor Refund", "pdf": "https://docquery.fec.gov/pdf/703/202407209665685703/202407209665685703.pdf"}, {"date": "2024-07-24", "entity_type": "ORG", "name": "CSC Corp", "amount": 250.0, "description": "Legal Fees Refund", "pdf": "https://docquery.fec.gov/pdf/058/202410109684851058/202410109684851058.pdf"}, {"date": "2024-07-31", "entity_type": "ORG", "name": "Unitemized Contribution Refunds", "amount": -233.34, "description": "Contribution Refunds", "pdf": "https://docquery.fec.gov/pdf/058/202410109684851058/202410109684851058.pdf"}, {"date": "2024-08-07", "entity_type": "COM", "name": "The Lars Mapstead  for President", "amount": 7597.76, "description": "Contribution", "pdf": "https://docquery.fec.gov/pdf/962/202412319740046962/202412319740046962.pdf"}, {"date": "2024-08-08", "entity_type": "COM", "name": "The Mike ter Maat Campaign", "amount": 4209.54, "description": "Contribution", "pdf": "https://docquery.fec.gov/pdf/962/202412319740046962/202412319740046962.pdf"}], "timeline": [{"date": "2016-02-20", "when": "Feb 20, 2016", "title": "The Card-Data Warning", "people": ["Sam Goldstein, IT Committee Chair"], "items": [{"q": "Raiser’s Edge will not provide us the donor credit card information for our monthly pledgers to facilitate us transferring them to another system.", "who": "", "src": "20160220_LNC.txt", "page": 7, "cite": "LNC minutes, p.7", "url": "https://lp.org/wp-content/uploads/2024/10/20160220_LNC.pdf#page=7"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2016-12-10", "when": "Dec 10, 2016", "title": "Moellman Chairs The IT Committee", "people": ["Ken Moellman, IT Committee Chair"], "items": [{"q": "Mr. Moellman, as chair of the IT Committee", "who": "", "src": "2016_12_10-LNC-Minutes-approved.txt", "page": 8, "cite": "LNC minutes, p.8", "url": "https://lp.org/wp-content/uploads/2024/10/2016_12_10-LNC-Minutes-approved.pdf#page=8"}], "note": "CiviCRM is built for the state parties first; Raiser's Edge stays national's fundraising system.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2018-04-21", "when": "Apr 2018", "title": "Moellman Named Lead Consultant", "people": ["Andy Burns, Staff", "Ken Moellman, Lead Consultant"], "items": [{"q": "I want to give a special thanks to Ken Moellman in his lead consultant role with the project", "who": "Andy Burns, in his staff report", "src": "2018_04_21-22_LNC_Minutes-approved.txt", "page": 27, "cite": "LNC minutes, p.27", "url": "https://lp.org/wp-content/uploads/2024/10/2018_04_21-22_LNC_Minutes-approved.pdf#page=27"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2020-09-12", "when": "Sep 12, 2020", "title": "A Staff Caution On The Timing", "people": ["Daniel Fishman, Executive Director"], "items": [{"q": "frankly cannot be assessed adequately right now. It is probably too ambitious for a Presidential year.", "who": "Daniel Fishman, Executive Director, written report", "src": "LNC-MEETING_2020-09-12_FINAL.txt", "page": 95, "cite": "LNC minutes, p.95", "url": "https://lp.org/wp-content/uploads/2025/02/LNC-MEETING_2020-09-12_FINAL.pdf#page=95"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2020-12-05", "when": "Dec 5–6, 2020", "title": "Fundraising Staff Say CiviCRM Falls Short", "people": ["Tara DeSisto, Development Director", "Erin Adams, Region 7"], "items": [{"q": "Razor's Edge services our needs from a fundraising level uh about 85% and what I see from the civvy right now uh is 55 60%", "who": "Tara DeSisto, Development Director", "src": "2020-12-05_SV-wckFUF1M.md", "time": "4:04:31", "cite": "Meeting recording, 4:04:31", "url": "https://www.youtube.com/watch?v=SV-wckFUF1M&t=14671s"}, {"q": "messing with our fundraising database in favor of something we haven't built yet is a big danger", "who": "Unnamed speaker", "src": "2020-12-05_SV-wckFUF1M.md", "time": "4:40:53", "cite": "Meeting recording, 4:40:53", "url": "https://www.youtube.com/watch?v=SV-wckFUF1M&t=16853s"}, {"q": "if we don't put enough money into civvy to make it functional we might as well dump it", "who": "Erin Adams, Region 7", "src": "2020-12-06_pBmL2Gy48-8.md", "time": "0:36:35", "cite": "Meeting recording, 0:36:35", "url": "https://www.youtube.com/watch?v=pBmL2Gy48-8&t=2195s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2021-12-04", "when": "Dec 4–5, 2021", "title": "A Gap Analysis Is Ordered", "people": ["Ken Moellman, Vice-Chair", "Ryan Graham, Georgia Chair"], "items": [{"q": "Mr. Moellman moved to appoint Ryan Graham of Georgia to lead a gap analysis for phasing out Raiser’s Edge by end of 2022", "who": "", "src": "LNC-MINUTES_2021-120421_FINAL.txt", "page": 30, "cite": "LNC minutes, p.30", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2021-120421_FINAL.pdf#page=30"}], "note": "The gap analysis report has never been found.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2022-05-28", "when": "May 2022", "title": "Reno Convention: Angela McArdle Elected Chair", "people": ["Angela McArdle, Chair"], "items": [], "note": "", "note_cite": "", "note_url": "", "kind": "context"}, {"date": "2022-07-31", "when": "Jul 30–31, 2022", "title": "The Board Sets A Year-End Deadline", "people": ["Dustin Nanna, LNC Member", "Tyler Harris, Executive Director", "Gabrielle Cordova, Development Director", "Andy Burns, Staff"], "items": [{"q": "Mr. Nanna moved that we prioritize the Raiser’s Edge migration with the goal of completion by the end of the year", "who": "Minutes; the motion passed 9-3-3", "src": "LNC-MINUTES_2022-07-30-31_FINAL.txt", "page": 18, "cite": "LNC minutes, p.18", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2022-07-30-31_FINAL.pdf#page=18"}, {"q": "a technology team that is eager to move forward and a development team that is saying this product is not ready to provide us the tools we need", "who": "Tyler Harris, Executive Director", "src": "2022-07-31_vT2nWqv62Fs.md", "time": "1:01:58", "cite": "Meeting recording, 1:01:58", "url": "https://www.youtube.com/watch?v=vT2nWqv62Fs&t=3718s"}, {"q": "after convention i had to wait over a week before i could do any reporting within nxt", "who": "Gabrielle Cordova, Development Director", "src": "2022-07-31_vT2nWqv62Fs.md", "time": "1:03:02", "cite": "Meeting recording, 1:03:02", "url": "https://www.youtube.com/watch?v=vT2nWqv62Fs&t=3782s"}, {"q": "Please see the separate report on the LNC Raiser's Edge Migration Gap Analysis.", "who": "Andy Burns, staff report; the report is not attached", "src": "LNC-MINUTES_2022-07-30-31_FINAL.txt", "page": 95, "cite": "LNC minutes, p.95", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2022-07-30-31_FINAL.pdf#page=95"}, {"q": "so that we could actually get that information and then we never met again", "who": "Unnamed; the motion described matches Moellman's", "src": "2022-07-31_vT2nWqv62Fs.md", "time": "0:26:51", "cite": "Meeting recording, 0:26:51", "url": "https://www.youtube.com/watch?v=vT2nWqv62Fs&t=1611s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2022-11-05", "when": "Nov 5–6, 2022", "title": "The Cutover Is Under Way", "people": ["Dustin Nanna", "Ken Moellman"], "items": [{"q": "Mr. Nanna and Mr. Moellman led a discussion on the status of the Raiser’s Edge migration.", "who": "", "src": "LNC-Meeting_2022-11-5-6_FINAL.txt", "page": 15, "cite": "LNC minutes, p.15", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2022-11-5-6_FINAL.pdf#page=15"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2022-12-15", "when": "Dec 2022", "title": "Staff Changes At The Switch", "people": ["Andy Burns, Staff", "Cara Schulz, Contractor", "Angela McArdle, Chair", "Lainie Huston, Executive Director"], "items": [{"q": "In late December 2022, he decided to exercise that option.", "who": "Ken Moellman, on Burns's 7-day termination clause", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}, {"q": "January 2023. The CRM had no administrator.", "who": "Ken Moellman", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}], "note": "Moellman writes that McArdle and Huston decided in mid-December not to renew Cara Schulz's contract and accused Burns of tipping her off, which Burns denied. Burns's last FEC payment is dated December 30, 2022.", "note_cite": "FEC disbursements to Burns, 2021–2022", "note_url": "https://www.fec.gov/data/disbursements/?committee_id=C00255695&two_year_transaction_period=2022&recipient_name=Burns", "kind": "record"}, {"date": "2023-03-11", "when": "Mar 11, 2023", "title": "Staff Report What Was Lost", "people": ["Lainie Huston, Executive Director", "Her Staff (Speaker Unnamed)", "Todd Hagopian, Treasurer (Probable)"], "items": [{"q": "", "who": "Membership report: active monthly pledgers fell from 3,004 (December 2022) to 2,947 (January) and 2,702 (February 2023)", "src": "LNC-Meeting_2023-03-11-12_FINAL.txt", "page": 96, "cite": "LNC minutes, p.96", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=96"}, {"q": "a substantial amount of donations which were permanently married to the razor's Edge tool", "who": "Staff presenter, unnamed", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:08:56", "cite": "Meeting recording, 1:08:56", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4136s"}, {"q": "we've been trying to reach them", "who": "Same speaker, on the $144,000 a year once at risk", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:09:59", "cite": "Meeting recording, 1:09:59", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4199s"}, {"q": "about four thousand dollars a month that is still yet unreclaimed", "who": "Same speaker", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:09:59", "cite": "Meeting recording, 1:09:59", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4199s"}, {"q": "we knowingly lost the ability to charge these people's credit cards", "who": "Same speaker", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:11:02", "cite": "Meeting recording, 1:11:02", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4262s"}, {"q": "we asked staff a couple of quick questions that's not a careful consultation", "who": "Lainie Huston, Executive Director", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:15:18", "cite": "Meeting recording, 1:15:18", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4518s"}, {"q": "chances are we lost money on the on the Racer's Edge migration unless we change things", "who": "Unnamed, probably Treasurer Todd Hagopian", "src": "2023-03-11_2Ch9BtK6r80.md", "time": "1:21:37", "cite": "Meeting recording, 1:21:37", "url": "https://www.youtube.com/watch?v=2Ch9BtK6r80&t=4897s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2023-05-15", "when": "May 2023", "title": "The Chair's Confidential Memo", "people": ["Angela McArdle, Chair"], "items": [{"q": "The takeover is turning into a disaster. It started with the migration", "who": "Angela McArdle, memo to the LNC, leaked August 2023", "cite": "Third Party Watch reprint, Aug 19, 2023", "url": "https://thirdpartywatch.com/2023/08/19/the-mcardle-memorandum-iii-fundraising-the-takeover-and-other-lnc-issues/"}], "note": "The leak, compiled by Miguel and Anna Johnson Duque, was posted as The Angela Papers. Their introduction says the migration lost five figures in monthly revenue.", "note_cite": "The Angela Papers, archived Dec 23, 2023 (Introduction PDF linked from the archive)", "note_url": "https://web.archive.org/web/20231223073748/http://angelapapers.com/", "kind": "record"}, {"date": "2023-07-02", "when": "Jul 2, 2023", "title": "A Board Member On Staff Silence", "people": ["Miguel Duque, Region 1"], "items": [{"q": "the staff at one point was told that they uh could not discuss anything negative about civi", "who": "Miguel Duque, Region 1", "src": "2023-07-02_luuVcvQ8wvA.md", "time": "1:34:24", "cite": "Meeting recording, 1:34:24", "url": "https://www.youtube.com/watch?v=luuVcvQ8wvA&t=5664s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2023-10-01", "when": "Oct 1, 2023", "title": "Recurring Revenue Still Lost", "people": ["Speaker Unnamed (Probably Chair McArdle)"], "items": [{"q": "we've lost a massive amount of recurring revenue from the failed Razor Edge migration", "who": "Unnamed; context suggests McArdle", "src": "2023-10-01_1GppmJd63CU.md", "time": "0:45:03", "cite": "Meeting recording, 0:45:03", "url": "https://www.youtube.com/watch?v=1GppmJd63CU&t=2703s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2023-10-23", "when": "Oct 23, 2023", "title": "Moellman Offers To Buy CiviCRM", "people": ["Ken Moellman", "Angela McArdle, Chair"], "items": [{"q": "I offered to buy Civi from National.", "who": "Ken Moellman", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}], "note": "He writes that McArdle answered \"we will take this under advisement\" and the offer went nowhere.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2023-12-02", "when": "Dec 2–3, 2023", "title": "No Real Attempt To Win Them Back", "people": ["Andy Buchkovich, CTO", "Dustin Nanna, Region 3"], "items": [{"q": "we still have not had a real attempt to contact all those people who had raisers subscriptions and get them back", "who": "Andy Buchkovich, CTO", "src": "2023-12-02_-AUczI0I-D8.md", "time": "2:13:30", "cite": "Meeting recording, 2:13:30", "url": "https://www.youtube.com/watch?v=-AUczI0I-D8&t=8010s"}, {"q": "Nothing the party was able to do in 2021 is able to reliably be done in Civi", "who": "IT slides, probably Buchkovich's", "src": "LNC-Meeting_2023-12-02-03_FINAL.V2.txt", "page": 73, "cite": "LNC minutes, p.73", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-12-02-03_FINAL.V2.pdf#page=73"}, {"q": "CiviCRM has not proven suitable for use for fundraising and membership purposes of the Libertarian National Committee.", "who": "Benner substitute motion", "src": "LNC-Meeting_2023-12-02-03_FINAL.V2.txt", "page": 16, "cite": "LNC minutes, p.16", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-12-02-03_FINAL.V2.pdf#page=16"}, {"q": "90% of this room voted with the professional and this is where we ended up", "who": "Dustin Nanna, Region 3", "src": "2023-12-03_P3svgMngehQ.md", "time": "1:55:31", "cite": "Meeting recording, 1:55:31", "url": "https://www.youtube.com/watch?v=P3svgMngehQ&t=6931s"}], "note": "This sits uneasily with the March 2023 report of efforts to reach the same donors.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2024-02-04", "when": "Feb 4, 2024", "title": "The Move To Zoho", "people": ["Angela McArdle, Chair"], "items": [{"q": "Chair McArdle gave an update on the decision to move to Zoho CRM", "who": "", "src": "LNC-Special-Meeting_2024-02-04-FINAL.txt", "page": 8, "cite": "LNC minutes, p.8", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Special-Meeting_2024-02-04-FINAL.pdf#page=8"}, {"q": "it's possible we could be completely finished moving over there by the end of March", "who": "Angela McArdle, Chair", "src": "2024-02-04_KLwm-I-Af44.md", "time": "1:05:28", "cite": "Meeting recording, 1:05:28", "url": "https://www.youtube.com/watch?v=KLwm-I-Af44&t=3928s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2024-04-07", "when": "Apr 7, 2024", "title": "Donations Lost To Technical Failings", "people": ["Angela McArdle, Chair"], "items": [{"q": "This will prevent donations from being lost due to technical failings in Civi", "who": "Chair's report", "src": "LNC-Minutes-2024-04-07-FINAL.txt", "page": 22, "cite": "LNC minutes, p.22", "url": "https://lp.org/wp-content/uploads/2025/02/LNC-Minutes-2024-04-07-FINAL.pdf#page=22"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2024-08-24", "when": "Aug 24, 2024", "title": "The Horror Stories", "people": ["Hannah Kennedy, Interim Executive Director"], "items": [{"q": "I was not present in the organization when we did the last migration um but I have heard the horror stories", "who": "Hannah Kennedy, Interim Executive Director", "src": "2024-08-24_UM9C3J1-HGM.md", "time": "0:38:28", "cite": "Meeting recording, 0:38:28", "url": "https://www.youtube.com/watch?v=UM9C3J1-HGM&t=2308s"}], "note": "", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2025-02-02", "when": "Feb 2025", "title": "McArdle Resigns; Nekhaila Becomes Chair", "people": ["Angela McArdle", "Steven Nekhaila, Chair"], "items": [], "note": "", "note_cite": "", "note_url": "", "kind": "context"}, {"date": "2025-04-11", "when": "Apr 11, 2025", "title": "CiviCRM Sold To Moellman Enterprises", "people": ["Steven Nekhaila, Chair", "Ken Moellman"], "items": [{"q": "And in the end I buy all of the assets from the Civi project at fair market value.", "who": "Ken Moellman", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}], "note": "The signed asset-transfer contract is in the project's breach materials. No LNC or Executive Committee vote approving the sale was found.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2025-11-01", "when": "Nov 1, 2025", "title": "National Is Shut Out Of CiviCRM", "people": ["Ken Moellman"], "items": [{"q": "I booted them out at 12:00:01 AM on 11/1/2025.", "who": "Ken Moellman", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}], "note": "Moellman also writes that CiviCRM's documentation was lost when the LNC moved from Google to Office 365, and that he has been rebuilding it.", "note_cite": "", "note_url": "", "kind": "record"}, {"date": "2026-02-15", "when": "Feb 15, 2026", "title": "Moellman Disputes The Scale Of The Loss", "people": ["Ken Moellman"], "items": [{"q": "Since we had been using Civi for LNC donations for 3 years at this point, there weren't that many.", "who": "Ken Moellman, on the recurring donors lost", "cite": "Ken Moellman's email to Austin Martin, Feb 15, 2026 (in the project's files; not published)", "url": ""}], "note": "He says those lost were the donors without current contact details, which a data append and cleanse would have fixed; that cleanse was never done.", "note_cite": "", "note_url": "", "kind": "record"}], "members": [{"month": "2020-01", "members": 15791}, {"month": "2020-02", "members": 15936}, {"month": "2020-03", "members": 15944}, {"month": "2020-04", "members": 16374}, {"month": "2020-05", "members": 17026}, {"month": "2020-06", "members": 18294}, {"month": "2020-07", "members": 19013}, {"month": "2020-08", "members": 19418}, {"month": "2020-09", "members": 20023}, {"month": "2020-10", "members": 20138}, {"month": "2020-11", "members": 20158}, {"month": "2020-12", "members": 19803}, {"month": "2021-01", "members": 20215}, {"month": "2021-02", "members": 20002}, {"month": "2021-03", "members": 19834}, {"month": "2021-04", "members": 19834}, {"month": "2021-05", "members": 19354}, {"month": "2021-06", "members": 18540}, {"month": "2021-07", "members": 17578}, {"month": "2021-08", "members": 17095}, {"month": "2021-09", "members": 16835}, {"month": "2021-10", "members": 17284}, {"month": "2021-11", "members": 17032}, {"month": "2021-12", "members": 17014}, {"month": "2022-01", "members": 16694}, {"month": "2022-02", "members": 16629}, {"month": "2022-03", "members": 16550}, {"month": "2022-04", "members": 16334}, {"month": "2022-05", "members": 16254}, {"month": "2022-06", "members": 16818}, {"month": "2022-07", "members": 16851}, {"month": "2022-08", "members": 16778}, {"month": "2022-09", "members": 16505}, {"month": "2022-10", "members": 16724}, {"month": "2022-11", "members": 16624}, {"month": "2022-12", "members": 16331}, {"month": "2023-01", "members": 16237}, {"month": "2023-02", "members": 15710}, {"month": "2023-04", "members": 15954}, {"month": "2023-05", "members": 15539}, {"month": "2023-06", "members": 15060}, {"month": "2023-07", "members": 14080}, {"month": "2023-08", "members": 13620}, {"month": "2023-09", "members": 12317}, {"month": "2023-10", "members": 12747}, {"month": "2023-11", "members": 12492}, {"month": "2023-12", "members": 12344}, {"month": "2024-01", "members": 12326}, {"month": "2024-02", "members": 12334}, {"month": "2024-03", "members": 12358}, {"month": "2024-04", "members": 12211}, {"month": "2024-05", "members": 12204}, {"month": "2024-06", "members": 11936}, {"month": "2024-07", "members": 11892}, {"month": "2024-08", "members": 12061}, {"month": "2024-09", "members": 11461}, {"month": "2024-10", "members": 11679}, {"month": "2024-11", "members": 11731}, {"month": "2024-12", "members": 10569}, {"month": "2025-01", "members": 10367}, {"month": "2025-02", "members": 10177}, {"month": "2025-03", "members": 9954}, {"month": "2025-04", "members": 9794}, {"month": "2025-05", "members": 9595}, {"month": "2025-06", "members": 9517}, {"month": "2025-07", "members": 9399}, {"month": "2025-08", "members": 9868}, {"month": "2025-09", "members": 9801}, {"month": "2025-10", "members": 9348}, {"month": "2025-11", "members": 9296}, {"month": "2025-12", "members": 9090}, {"month": "2026-01", "members": 8989}, {"month": "2026-02", "members": 8972}, {"month": "2026-03", "members": 8852}, {"month": "2026-04", "members": 8816}, {"month": "2026-05", "members": 8875}, {"month": "2026-06", "members": 8878}, {"month": "2026-07", "members": 8916}, {"month": "2026-08", "members": 8948}, {"month": "2026-09", "members": 8891}], "pledgers": [{"month": "2021-07", "pledgers": 3020, "source": "Membership report, LNC minutes Sep 4–5, 2021, p.215", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2021-09-04-05_FINAL.pdf#page=215"}, {"month": "2021-12", "pledgers": 3210, "source": "Membership report, LNC minutes Jul 30–31, 2022, p.232", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2022-07-30-31_FINAL.pdf#page=232"}, {"month": "2022-07", "pledgers": 3139, "source": "Membership report, LNC minutes Jul 30–31, 2022, p.232", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2022-07-30-31_FINAL.pdf#page=232"}, {"month": "2022-10", "pledgers": 2930, "source": "Membership report, LNC minutes Nov 5–6, 2022, p.164", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2022-11-5-6_FINAL.pdf#page=164"}, {"month": "2022-11", "pledgers": 2739, "source": "Membership report, LNC minutes Mar 11–12, 2023, p.96", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=96"}, {"month": "2022-12", "pledgers": 3004, "source": "Membership report, LNC minutes Mar 11–12, 2023, p.96", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=96"}, {"month": "2023-01", "pledgers": 2947, "source": "Membership report, LNC minutes Mar 11–12, 2023, p.96", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=96"}, {"month": "2023-02", "pledgers": 2702, "source": "Membership report, LNC minutes Mar 11–12, 2023, p.96", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=96"}], "recurring": [{"month": "2021-07", "recurring": 50260, "source": "Financial statement, LNC minutes Sep 4–5, 2021, p.38", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2021-09-04-05_FINAL.pdf#page=38"}, {"month": "2021-10", "recurring": 50667, "source": "Financial statement, LNC minutes Dec 4–5, 2021, p.57", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2021-120421_FINAL.pdf#page=57"}, {"month": "2022-04", "recurring": 50675, "source": "Financial statement, LNC minutes May 26, 2022, p.21", "url": "https://lp.org/wp-content/uploads/2024/10/20220526-LNC-Meeting-FINAL-1.pdf#page=21"}, {"month": "2022-06", "recurring": 53901, "source": "Financial statement, LNC minutes Jul 30–31, 2022, p.64", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-MINUTES_2022-07-30-31_FINAL.pdf#page=64"}, {"month": "2022-10", "recurring": 49577, "source": "Financial statement, LNC minutes Nov 5–6, 2022, p.43", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2022-11-5-6_FINAL.pdf#page=43"}, {"month": "2023-02", "recurring": 45498.23, "source": "Financial statement, LNC minutes Mar 11–12, 2023, p.44", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-03-11-12_FINAL.pdf#page=44"}, {"month": "2023-10", "recurring": 38969, "source": "Financial statement, LNC minutes Dec 2–3, 2023, p.39", "url": "https://lp.org/wp-content/uploads/2024/10/LNC-Meeting_2023-12-02-03_FINAL.V2.pdf#page=39"}, {"month": "2024-01", "recurring": 35107, "source": "Financial statement, LNC minutes Apr 7, 2024, p.38", "url": "https://lp.org/wp-content/uploads/2025/02/LNC-Minutes-2024-04-07-FINAL.pdf#page=38"}, {"month": "2024-02", "recurring": 33813, "source": "Financial statement, LNC minutes Apr 7, 2024, p.38", "url": "https://lp.org/wp-content/uploads/2025/02/LNC-Minutes-2024-04-07-FINAL.pdf#page=38"}]};</script>
+<script>
+/* Stand-in for the claude.ai dashboard host: the same dash.data / calc / draw calls, over data
+   embedded in this page. */
+window.dash = (function () {
+  const DATA = window.__DASH_DATA__, calcs = {}, draws = {};
+  const api = {
+    colors: [],
+    data(id) {
+      if (id in DATA) return { status: 'ok', data: DATA[id], columns: DATA[id][0] ? Object.keys(DATA[id][0]) : [], meta: [] };
+      const c = calcs[id];
+      if (c) { if (!('v' in c)) c.v = c.fn(...c.inputs.map((i) => api.data(i).data)); return { status: 'ok', data: c.v, meta: [] }; }
+      return { status: 'missing', data: [], meta: [] };
+    },
+    calc(id, o) { calcs[id] = o; },
+    loader() {},
+    draw(name, fn) {
+      if (fn) draws[name] = fn;
+      document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { draws[name] && draws[name](el); } catch (e) { console.error(name, e); } });
+    },
+    onData(fn) { fn(); },
+    params() { return {}; }, setParams() {}, resetParams() {}, setLink() {}, refresh() {},
+  };
+  let w = 0, t = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { if (Math.abs(window.innerWidth - w) > 2) { w = window.innerWidth; Object.keys(draws).forEach((n) => api.draw(n)); } }, 150);
+  });
+  w = window.innerWidth;
+  return api;
+})();
+</script>
+<div id="dash-root">
+
+<div class="dd">
+  <header style="display:grid;gap:1rem">
+    <p class="eyebrow">The LNC record</p>
+    <h1 id="top">LNC Donor Drop-Off, 2021–2024</h1>
+    <div class="rule"></div>
+    <p class="lede">Individual giving to the LNC fell by <b data-draw="k-drop" data-source="kpi" data-field="drop">—</b> from 2022 to 2023. <b data-draw="k-share" data-source="kpi" data-field="itemShare">—</b> of it was gifts from donors who gave over $200 a year. Of the <b data-draw="k-base" data-source="kpi" data-field="base">—</b> people who gave over $200 in 2022, <b data-draw="k-lost" data-source="kpi" data-field="lost">—</b> did not do so again in 2023, and <b data-draw="k-back" data-source="kpi" data-field="back">—</b> of them came back in 2024.</p>
+  </header>
+
+  <section class="tiles" aria-label="Headline figures">
+    <div class="card tile"><div class="num" data-draw="k-drop" data-source="kpi" data-field="drop">—</div><div class="label">Drop In Individual Giving, 2022 To 2023</div></div>
+    <div class="card tile"><div class="num" data-draw="k-share" data-source="kpi" data-field="itemShare">—</div><div class="label">Of The Drop From Donors Who Gave Over $200</div></div>
+    <div class="card tile"><div class="num" data-draw="k-lost" data-source="kpi" data-field="lost">—</div><div class="label">2022 Donors Over $200 Not Back In 2023</div></div>
+    <div class="card tile"><div class="num" data-draw="k-back" data-source="kpi" data-field="back">—</div><div class="label">Of Those, Back Over $200 In 2024</div></div>
+  </section>
+
+  <section class="card" id="years">
+    <h2>Individual Giving By Year</h2>
+    <p class="note">All gifts from individuals, as the LNC reported them to the FEC, split the FEC's way: itemized gifts, which a donor's gifts become once their total for the year passes $200, and unitemized gifts, which include those donors' earlier gifts. 2026 runs only to mid-October.</p>
+    <div class="key"><span><span class="sw gold"></span>Itemized Gifts</span><span><span class="sw slate"></span>Unitemized Gifts</span></div>
+    <div class="chart" data-draw="yearchart" data-source="fec_years"></div>
+    <div class="scroll">
+      <table data-source="yearsx" data-row-key="year">
+        <thead><tr><th data-field="year">Year</th><th class="n" data-field="individual">All Individual Gifts</th><th class="n" data-field="itemized">Itemized</th><th class="n" data-field="unitemized">Unitemized</th><th class="n" data-field="change">Change In All Gifts</th></tr></thead>
+        <tbody data-draw="yeartable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="card" id="split">
+      <h2>Where The 2022–2023 Drop Came From</h2>
+      <p class="note">The fall in all individual gifts from 2022 to 2023. Donors who gave over $200 are counted at their full-year totals, taken from the year-to-date figure the LNC reports for each donor.</p>
+      <div class="scroll"><table data-source="drop" data-row-key="part">
+        <thead><tr><th data-field="part">Part Of The Drop</th><th class="n" data-field="amount">Amount</th><th class="n" data-field="share">Share</th></tr></thead>
+        <tbody data-draw="droptable"></tbody>
+      </table></div>
+      <p class="note">The slide began before the May 2022 takeover. Reason <a href="https://reason.com/2022/05/29/mises-caucus-takes-control-of-libertarian-party/" target="_blank" rel="noopener">reported in May 2022</a> that active donors had been falling for seven straight months, and 2022's total was held up by the Reno convention month.</p>
+    </section>
+
+    <section class="card" id="keep">
+      <h2>Donors Kept, Lost &amp; New</h2>
+      <p class="note">Donors who gave over $200 in one year, and whether they did again the next.</p>
+      <div class="scroll">
+        <table data-source="retention" data-row-key="transition">
+          <thead><tr><th data-field="transition">Years</th><th class="n" data-field="donors">Donors</th><th class="n" data-field="kept">Kept</th><th class="n" data-field="lost">Lost</th><th class="n" data-field="lost_gave">Lost Donors Had Given</th><th class="n" data-field="new">New</th><th class="n" data-field="new_gave">New Donors Gave</th></tr></thead>
+          <tbody data-draw="rettable"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" id="sizes">
+    <h2>Who Left In 2023, By Gift Size</h2>
+    <p class="note">The 2022 donors who gave over $200, grouped by their full-year 2022 total (the year-to-date figure the LNC reports, which includes gifts made before they passed $200). "Left" means not over $200 in 2023; they may have given less. Gold bars mark the group that lost the most money.</p>
+    <div class="scroll">
+      <table data-source="bands_2022" data-row-key="band">
+        <thead><tr><th data-field="band">Gave In 2022</th><th class="n" data-field="donors">Donors</th><th class="n" data-field="stopped">Left</th><th class="n" data-field="gave_2022">Gave In 2022</th><th class="n" data-field="gave_2023">Gave In 2023</th><th class="n" data-field="came_back_2024">Left, Back In 2024</th></tr></thead>
+        <tbody data-draw="bandtable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="card" id="top">
+      <h2>The Biggest Donors</h2>
+      <p class="note">2022's largest donors, and what the same people gave in 2023. Each row includes the rows above it: the top 25 are the top 10 plus the next 15, so the rows are not added together.</p>
+      <div class="scroll"><table data-source="top_2022" data-row-key="group">
+        <thead><tr><th data-field="group">2022 Donors</th><th class="n" data-field="gave_2022">Gave 2022</th><th class="n" data-field="gave_2023">Gave 2023</th><th class="n" data-field="stopped">Left</th></tr></thead>
+        <tbody data-draw="toptable"></tbody>
+      </table></div>
+      <p class="note">The loss was spread across every size of gift, not a few large givers.</p>
+    </section>
+
+    <section class="card" id="status">
+      <h2>2022 To 2023, Donor By Donor</h2>
+      <p class="note">Every donor who gave over $200 in 2022 or 2023.</p>
+      <div class="scroll"><table data-source="status_2022_2023" data-row-key="status">
+        <thead><tr><th data-field="status">What Happened</th><th class="n" data-field="donors">Donors</th><th class="n" data-field="gave_2022">Gave 2022</th><th class="n" data-field="gave_2023">Gave 2023</th></tr></thead>
+        <tbody data-draw="stattable"></tbody>
+      </table></div>
+    </section>
+  </div>
+
+  <section class="card" id="when">
+    <h2>When The Lost Donors Last Gave</h2>
+    <p class="note">The month of the last 2022 gift from each donor who gave over $200 in 2022 but not in 2023. Gold marks May, the Reno convention and takeover, and December, around when the LNC switched its donor database from Raiser's Edge to CiviCRM.</p>
+    <div class="key"><span><span class="sw gold"></span>May &amp; December 2022</span><span><span class="sw slate"></span>Other Months</span></div>
+    <div class="chart" data-draw="monthchart" data-source="left_by_month"></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card" id="monthly">
+      <h2>Likely Monthly Donors</h2>
+      <p class="note">Donors with six or more gifts over the itemizing line in 2022, a sign of a monthly pledge. The FEC does not mark recurring gifts, so this is an estimate.</p>
+      <div class="tiles">
+        <div class="card tile"><div class="num" data-draw="m-donors" data-source="comeback" data-field="monthly_donors">—</div><div class="label">Likely Monthly Donors In 2022</div></div>
+        <div class="card tile"><div class="num" data-draw="m-stopped" data-source="comeback" data-field="monthly_stopped">—</div><div class="label">Not Over $200 In 2023</div></div>
+      </div>
+      <p class="note">They gave <b data-draw="m-22" data-source="comeback" data-field="monthly_gave_2022">—</b> in 2022 and <b data-draw="m-23" data-source="comeback" data-field="monthly_gave_2023">—</b> in 2023.</p>
+    </section>
+
+    <section class="card" id="moved">
+      <h2>Donors Who Moved</h2>
+      <p class="note">A donor who gives from a new ZIP code is still one donor. The same name at two ZIP codes is joined, unless both gave in the same month or their middle initials differ, which points to two different people.</p>
+      <div class="tiles">
+        <div class="card tile"><div class="num" data-draw="mv-joined" data-source="matching" data-field="joined_moves">—</div><div class="label">Records Joined As Movers</div></div>
+        <div class="card tile"><div class="num" data-draw="mv-donors" data-source="matching" data-field="donors">—</div><div class="label">Unique Donors, 2021–2024</div></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" id="members">
+    <h2>Members &amp; Monthly Pledgers Around The Switch</h2>
+    <p class="note">National sustaining members by month (the count used to allocate convention delegates), with the conventions and the Raiser's Edge cutover marked. March 2023 is missing from the reports and left as a gap.</p>
+    <div class="key"><span><span class="sw gold"></span>Sustaining Members</span><span><span class="sw slate"></span>Conventions &amp; The Cutover</span></div>
+    <div class="chart" data-draw="memchart" data-source="members"></div>
+    <div class="grid2">
+      <div>
+        <p class="note"><b>Active Monthly Pledgers.</b> From the membership reports attached to the minutes. Later reports drop this line.</p>
+        <div class="scroll"><table data-source="pledgers" data-row-key="month">
+          <thead><tr><th data-field="month">Month</th><th class="n" data-field="pledgers">Pledgers</th><th data-field="source">Source</th></tr></thead>
+          <tbody data-draw="pledgetable"></tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="note"><b>Recurring Gifts Per Month.</b> From the financial statements attached to the minutes.</p>
+        <div class="scroll"><table data-source="recurring" data-row-key="month">
+          <thead><tr><th data-field="month">Month</th><th class="n" data-field="recurring">Recurring</th><th data-field="source">Source</th></tr></thead>
+          <tbody data-draw="rectable"></tbody>
+        </table></div>
+      </div>
+    </div>
+    <p class="fine">Monthly membership counts are those compiled in the Member Database Timeline: LNC minutes to March 2025, then the monthly reports posted to the LNC public list.</p>
+  </section>
+
+  <section class="card" id="migration">
+    <h2>How The Migration Unfolded</h2>
+    <p class="note">The move from Raiser's Edge to CiviCRM and then Zoho, from 2016 to today, in the record's own words. Each step names the people the record places there; that records their part, not fault. Every citation links to its source: the minutes page on lp.org, the moment in the meeting recording, or the archived page. Moellman's 2026 email is in the project's files and has no public link.</p>
+    <div class="tl" data-draw="timeline" data-source="timeline"></div>
+  </section>
+
+  <section class="card" id="other">
+    <h2>Other Entries On The Individual Line</h2>
+    <p class="note">Entries the LNC filed among individual gifts that are not individuals, all in 2024. They are left out of the donor counts above, which is why 2024's donor dollars are lower than its reported total.</p>
+    <div class="scroll">
+      <table data-source="non_individual" data-row-key="date,name">
+        <thead><tr><th data-field="date">Date</th><th data-field="name">From</th><th data-field="description">Described As</th><th class="n" data-field="amount">Amount</th><th data-field="pdf">Filing</th></tr></thead>
+        <tbody data-draw="othertable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details>
+    <summary>How To Read This Page</summary>
+    <ul>
+      <li><b>Source.</b> The LNC's own FEC filings (<a href="https://www.fec.gov/data/committee/C00255695/" target="_blank" rel="noopener">committee C00255695</a>): its reported totals for every year, and its itemized gifts from all 48 reports covering 2021 to 2024. The itemized gifts add up to the LNC's reported total on every report, to the cent.</li>
+      <li><b>Over $200 means over $200 in a calendar year.</b> The FEC itemizes a donor once their gifts for the year pass $200, so a monthly donor at $25 counts as under $200 until late in the year.</li>
+      <li><b>July 2023 is under-reported.</b> The LNC's July 2023 report itemizes only a handful of gifts; most regular donors that month were likely reported as unitemized. Yearly totals are unaffected, but July 2023 on its own should not be read as a real dip.</li>
+      <li><b>Checked independently.</b> A separate review re-parsed all 48 filings and reproduced these figures; it found the missing March 2016 report and the size-band issue, both fixed here.</li>
+      <li><b>"Left" is not proof someone stopped giving.</b> It means they did not give over $200 that year; they may have given less.</li>
+      <li><b>Matching.</b> Donors are matched by name, then joined across ZIP codes so that someone who moved counts once. Two people with the same name who never gave in the same month could be joined by mistake; two entries of one person under different spellings stay apart.</li>
+      <li><b>No names.</b> This page shows counts only. The donor-level table is kept in the project for research; federal law bars using FEC contributor names to ask for money.</li>
+      <li><b>The quotes</b> were checked word for word against the LNC minutes, the meeting transcripts, and the memo as reprinted. The March 2023 speaker is not named in the recording. Naming a person at a step records their part in it, not fault.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+  dash.calc('yearsx', {
+    inputs: ['fec_years'],
+    title: 'Giving by year with change',
+    description: 'Each year of individual gifts with the change in the total from the year before.',
+    fn: (fec_years) => fec_years.map((r, i) => ({ year: r.year, individual: r.individual, itemized: r.itemized, unitemized: r.unitemized, partial: r.partial,
+      change: i ? r.individual - fec_years[i - 1].individual : null })),
+  });
+  dash.calc('drop', {
+    inputs: ['fec_years', 'over200'],
+    title: '2022 to 2023 drop by kind',
+    description: 'The fall in individual gifts from 2022 to 2023, split into the full-year giving of donors who gave over $200 and everyone else.',
+    fn: (fec_years, over200) => {
+      const a = fec_years.find((r) => r.year === '2022'), b = fec_years.find((r) => r.year === '2023');
+      const o = (y) => over200.find((r) => r.year === y).gave;
+      const tot = a.individual - b.individual, big = o('2022') - o('2023'), rest = tot - big;
+      return [{ part: 'Donors who gave over $200 in the year', amount: -big, share: big / tot }, { part: 'Everyone else', amount: -rest, share: rest / tot }, { part: 'All individual gifts', amount: -tot, share: 1 }];
+    },
+  });
+  dash.calc('kpi', {
+    inputs: ['fec_years', 'over200', 'retention', 'comeback'],
+    title: 'Headline figures',
+    description: 'The 2022 to 2023 drop, the share from donors who gave over $200, donors lost, and how many came back in 2024.',
+    fn: (fec_years, over200, retention, comeback) => {
+      const a = fec_years.find((r) => r.year === '2022'), b = fec_years.find((r) => r.year === '2023');
+      const o = (y) => over200.find((x) => x.year === y).gave;
+      const r = retention.find((x) => x.from === '2022');
+      return [{ drop: a.individual - b.individual, itemShare: (o('2022') - o('2023')) / (a.individual - b.individual), base: r.donors, lost: r.lost, back: comeback[0].back_2024 }];
+    },
+  });
+
+  const GOLD = '#E2B13C', SLATE = '#3A4D70', CREAM = '#F5F1E8', MIST = '#C5CFDF', GRID = 'rgba(197, 207, 223, 0.16)';
+  const money = d3.format('$,.0f'), num = d3.format(','), pct = d3.format('.0%');
+  const short = (v) => (Math.abs(v) >= 1e6 ? d3.format('$.2s')(v).replace('G', 'B') : d3.format('$,.0f')(v));
+  const ok = (id) => { const d = dash.data(id); return d.status === 'ok' ? d.data : null; };
+  const one = (id) => { const d = ok(id); return d && d.length ? d[0] : null; };
+  const fill = (name, id, f) => dash.draw(name, (el) => { const k = one(id); el.textContent = k ? f(k) : '—'; });
+  fill('k-drop', 'kpi', (k) => money(k.drop));
+  fill('k-share', 'kpi', (k) => pct(k.itemShare));
+  fill('k-base', 'kpi', (k) => num(k.base));
+  fill('k-lost', 'kpi', (k) => num(k.lost));
+  fill('k-back', 'kpi', (k) => num(k.back));
+  fill('m-donors', 'comeback', (k) => num(k.monthly_donors));
+  fill('m-stopped', 'comeback', (k) => num(k.monthly_stopped));
+  fill('m-22', 'comeback', (k) => money(k.monthly_gave_2022));
+  fill('m-23', 'comeback', (k) => money(k.monthly_gave_2023));
+  fill('mv-joined', 'matching', (k) => num(k.joined_moves));
+  fill('mv-donors', 'matching', (k) => num(k.donors));
+
+  const cell = (tr, v, cls) => { const c = tr.insertCell(); c.textContent = v; if (cls) c.className = cls; return c; };
+  const signed = (v) => (v == null ? '—' : (v > 0 ? '+' : '−') + money(Math.abs(v)));
+
+  dash.draw('yearchart', (el) => {
+    el.replaceChildren();
+    const rows = ok('fec_years');
+    if (!rows) { el.textContent = '—'; return; }
+    const w = Math.max(320, el.clientWidth), h = 300, m = { t: 26, r: 8, b: 30, l: 52 };
+    const x = d3.scaleBand(rows.map((r) => r.year), [m.l, w - m.r]).padding(0.25);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.individual)], [h - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).style('font-family', "'Public Sans', Arial, sans-serif");
+    svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y).attr('y2', y).attr('stroke', GRID);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => d3.format('$.1s')(v).replace('G', 'B')).tickSize(0)).attr('font-size', null).attr('font-family', null).call((g) => g.select('.domain').remove()).selectAll('text').attr('fill', MIST).attr('font-size', 11);
+    const xa = svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).tickSize(0)).attr('font-size', null).attr('font-family', null);
+    xa.select('.domain').attr('stroke', MIST);
+    xa.selectAll('text').attr('fill', MIST).attr('font-size', 11).attr('dy', '1.1em');
+    if (x.bandwidth() < 34) xa.selectAll('text').text((t) => "'" + t.slice(2));
+    const bw = Math.min(32, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('opacity', (r) => (r.partial ? 0.55 : 1));
+    g.append('rect').attr('x', (r) => x(r.year) + off).attr('width', bw).attr('y', (r) => y(r.unitemized)).attr('height', (r) => y(0) - y(r.unitemized)).attr('fill', SLATE);
+    g.append('rect').attr('x', (r) => x(r.year) + off).attr('width', bw).attr('y', (r) => y(r.individual)).attr('height', (r) => y(r.unitemized) - y(r.individual)).attr('rx', 2).attr('fill', GOLD);
+    g.append('text').attr('x', (r) => x(r.year) + x.bandwidth() / 2).attr('y', (r) => y(r.individual) - 6).attr('text-anchor', 'middle').attr('font-size', 10.5).attr('font-weight', 600).attr('fill', CREAM)
+      .text((r) => (x.bandwidth() >= 34 ? short(r.individual) : ''));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('opacity', 0);
+    g.append('rect').attr('x', (r) => x(r.year)).attr('width', x.bandwidth()).attr('y', m.t).attr('height', h - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        tip.selectAll('*').remove();
+        tip.append('div').attr('class', 't').text(r.year + (r.partial ? ' (to mid-October)' : ''));
+        tip.append('div').text(`All individual gifts ${money(r.individual)}`);
+        tip.append('div').text(`Itemized ${money(r.itemized)}`);
+        tip.append('div').text(`Unitemized ${money(r.unitemized)}`);
+        const [px, py] = d3.pointer(ev, el), tw = tip.node().offsetWidth;
+        tip.style('left', `${Math.min(Math.max(0, px + 12), el.clientWidth - tw)}px`).style('top', `${Math.max(0, py - 70)}px`).style('opacity', 1);
+      })
+      .on('mouseleave', () => tip.style('opacity', 0));
+  });
+
+  dash.draw('yeartable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('yearsx');
+    if (!rows) return;
+    for (const r of rows) {
+      const tr = tb.insertRow(); tr.dataset.key = r.year;
+      cell(tr, r.year + (r.partial ? '*' : ''));
+      cell(tr, money(r.individual), 'n'); cell(tr, money(r.itemized), 'n'); cell(tr, money(r.unitemized), 'n');
+      cell(tr, r.partial ? 'partial year' : signed(r.change), 'n' + (r.change < 0 && !r.partial ? ' bad' : ''));
+    }
+  });
+
+  dash.draw('droptable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('drop');
+    if (!rows) return;
+    for (const r of rows) { const tr = tb.insertRow(); cell(tr, r.part); cell(tr, signed(r.amount), 'n bad'); cell(tr, pct(r.share), 'n'); }
+  });
+
+  dash.draw('rettable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('retention');
+    if (!rows) return;
+    for (const r of rows) {
+      const tr = tb.insertRow();
+      cell(tr, r.transition); cell(tr, num(r.donors), 'n'); cell(tr, num(r.kept), 'n'); cell(tr, num(r.lost), 'n bad');
+      cell(tr, money(r.lost_gave), 'n'); cell(tr, num(r.new), 'n'); cell(tr, money(r.new_gave), 'n');
+    }
+  });
+
+  dash.draw('bandtable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('bands_2022');
+    if (!rows) return;
+    const loss = (r) => r.gave_2022 - r.gave_2023, maxLoss = d3.max(rows, loss);
+    for (const r of rows) {
+      const tr = tb.insertRow();
+      cell(tr, r.band); cell(tr, num(r.donors), 'n');
+      const c = cell(tr, '', 'n'); const bar = document.createElement('span'); bar.className = 'bar' + (loss(r) === maxLoss ? ' hot' : '');
+      bar.style.width = `${(r.stopped / r.donors) * 3}rem`; c.append(bar, document.createTextNode(`${num(r.stopped)} (${pct(r.stopped / r.donors)})`));
+      cell(tr, money(r.gave_2022), 'n'); cell(tr, money(r.gave_2023), 'n'); cell(tr, num(r.came_back_2024), 'n');
+    }
+  });
+
+  dash.draw('toptable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('top_2022');
+    if (!rows) return;
+    for (const r of rows) { const tr = tb.insertRow(); cell(tr, r.group); cell(tr, money(r.gave_2022), 'n'); cell(tr, money(r.gave_2023), 'n'); cell(tr, `${r.stopped} of ${r.top}`, 'n'); }
+  });
+
+  dash.draw('stattable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('status_2022_2023');
+    if (!rows) return;
+    const label = { 'stopped (not itemized in 2023)': 'Left (not over $200 in 2023)', 'cut by half or more': 'Gave half or less', 'about the same': 'About the same', 'raised by half or more': 'Gave half again or more', 'new in 2023': 'New in 2023' };
+    for (const r of rows) {
+      const tr = tb.insertRow(); tr.dataset.key = r.status;
+      cell(tr, label[r.status] || r.status); cell(tr, num(r.donors), 'n'); cell(tr, money(r.gave_2022), 'n'); cell(tr, money(r.gave_2023), 'n');
+    }
+  });
+
+  dash.draw('monthchart', (el) => {
+    el.replaceChildren();
+    const rows = ok('left_by_month');
+    if (!rows) { el.textContent = '—'; return; }
+    const lab = (k) => d3.utcFormat('%b')(new Date(k + '-01T00:00:00Z'));
+    const hot = (k) => k.endsWith('-05') || k.endsWith('-12');
+    const w = Math.max(320, el.clientWidth), h = 280, m = { t: 22, r: 8, b: 30, l: 38 };
+    const x = d3.scaleBand(rows.map((r) => r.month), [m.l, w - m.r]).padding(0.25);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.donors)], [h - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).style('font-family', "'Public Sans', Arial, sans-serif");
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y).attr('y2', y).attr('stroke', GRID);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(0)).attr('font-size', null).attr('font-family', null).call((g) => g.select('.domain').remove()).selectAll('text').attr('fill', MIST).attr('font-size', 11);
+    const xa = svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).tickSize(0).tickFormat(lab)).attr('font-size', null).attr('font-family', null);
+    xa.select('.domain').attr('stroke', MIST);
+    xa.selectAll('text').attr('fill', MIST).attr('font-size', 11).attr('dy', '1.1em');
+    const bw = Math.min(32, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
+    const g = svg.append('g').selectAll('g').data(rows).join('g');
+    g.append('rect').attr('x', (r) => x(r.month) + off).attr('width', bw).attr('y', (r) => y(r.donors)).attr('height', (r) => y(0) - y(r.donors)).attr('rx', 2).attr('fill', (r) => (hot(r.month) ? GOLD : SLATE));
+    g.append('text').attr('x', (r) => x(r.month) + x.bandwidth() / 2).attr('y', (r) => y(r.donors) - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('font-weight', 600).attr('fill', CREAM).text((r) => String(r.donors));
+  });
+
+  const linkCell = (tr, label, href) => { const c = tr.insertCell(); if (href) { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; c.append(a); } else c.textContent = label; return c; };
+  const ym = (k) => d3.utcFormat('%b %Y')(new Date(k + '-01T00:00:00Z'));
+
+  dash.draw('pledgetable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('pledgers');
+    if (!rows) return;
+    for (const r of rows) { const tr = tb.insertRow(); tr.dataset.key = r.month; cell(tr, ym(r.month)); cell(tr, num(r.pledgers), 'n'); linkCell(tr, r.source, r.url); }
+  });
+  dash.draw('rectable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('recurring');
+    if (!rows) return;
+    for (const r of rows) { const tr = tb.insertRow(); tr.dataset.key = r.month; cell(tr, ym(r.month)); cell(tr, money(r.recurring), 'n'); linkCell(tr, r.source, r.url); }
+  });
+
+  dash.draw('memchart', (el) => {
+    el.replaceChildren();
+    const rows = ok('members');
+    if (!rows) { el.textContent = '—'; return; }
+    const pts = rows.map((r) => ({ d: new Date(r.month + '-15T00:00:00Z'), v: r.members, k: r.month }));
+    const w = Math.max(320, el.clientWidth), h = 300, m = { t: 26, r: 12, b: 30, l: 46 };
+    const x = d3.scaleUtc([d3.min(pts, (p) => p.d), d3.max(pts, (p) => p.d)], [m.l, w - m.r]);
+    const y = d3.scaleLinear([0, d3.max(pts, (p) => p.v)], [h - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).style('font-family', "'Public Sans', Arial, sans-serif");
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y).attr('y2', y).attr('stroke', GRID);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => d3.format(',')(v)).tickSize(0)).attr('font-size', null).attr('font-family', null).call((g) => g.select('.domain').remove()).selectAll('text').attr('fill', MIST).attr('font-size', 11);
+    const xa = svg.append('g').attr('transform', `translate(0,${h - m.b})`).call(d3.axisBottom(x).ticks(d3.utcYear.every(1)).tickFormat(d3.utcFormat('%Y')).tickSize(0)).attr('font-size', null).attr('font-family', null);
+    xa.select('.domain').attr('stroke', MIST);
+    xa.selectAll('text').attr('fill', MIST).attr('font-size', 11).attr('dy', '1.1em');
+    const marks = [['2022-05-28', 'Reno'], ['2022-12-01', 'Cutover'], ['2024-05-26', 'DC'], ['2026-05-24', 'Grand Rapids']];
+    for (const [d, label] of marks) {
+      const xx = x(new Date(d + 'T00:00:00Z'));
+      if (xx < m.l || xx > w - m.r) continue;
+      svg.append('line').attr('x1', xx).attr('x2', xx).attr('y1', m.t - 8).attr('y2', h - m.b).attr('stroke', SLATE).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+      const lt = svg.append('text').attr('y', m.t - 12).attr('font-size', 10.5).attr('fill', MIST).text(label);
+      const lw = lt.node().getComputedTextLength();
+      if (xx + 4 + lw > w - 2) lt.attr('x', xx - 4).attr('text-anchor', 'end'); else lt.attr('x', xx + 4);
+    }
+    const runs = []; let run = [];
+    pts.forEach((p, i) => { if (i && (p.d - pts[i - 1].d) > 45 * 864e5) { runs.push(run); run = []; } run.push(p); });
+    runs.push(run);
+    for (const r of runs) svg.append('path').datum(r).attr('fill', 'none').attr('stroke', GOLD).attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v)));
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('opacity', 0);
+    const dot = svg.append('circle').attr('r', 3.5).attr('fill', GOLD).style('opacity', 0);
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', w - m.l - m.r).attr('height', h - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev) => {
+        const [px, py] = d3.pointer(ev, el);
+        const p = pts[d3.bisector((q) => q.d).center(pts, x.invert(d3.pointer(ev)[0]))];
+        dot.attr('cx', x(p.d)).attr('cy', y(p.v)).style('opacity', 1);
+        tip.selectAll('*').remove();
+        tip.append('div').attr('class', 't').text(ym(p.k));
+        tip.append('div').text(`${num(p.v)} sustaining members`);
+        const tw = tip.node().offsetWidth;
+        tip.style('left', `${Math.min(Math.max(0, px + 12), el.clientWidth - tw)}px`).style('top', `${Math.max(0, py - 50)}px`).style('opacity', 1);
+      })
+      .on('mouseleave', () => { tip.style('opacity', 0); dot.style('opacity', 0); });
+  });
+
+  dash.draw('timeline', (el) => {
+    el.replaceChildren();
+    const rows = ok('timeline');
+    if (!rows) { el.textContent = '—'; return; }
+    const mk = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
+    const link = (txt, href) => { if (!href) return document.createTextNode(txt); const a = mk('a', null, txt); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; };
+    const list = (v) => { if (Array.isArray(v)) return v; if (typeof v === 'string' && v.trim().startsWith('[')) { try { return JSON.parse(v); } catch (err) { return []; } } return []; };
+    for (const e of rows.slice().sort((p, q) => String(p.date).localeCompare(String(q.date)))) {
+      const ev = mk('div', 'ev' + (e.kind === 'context' ? ' context' : ''));
+      ev.append(mk('div', 'when', e.when));
+      const what = mk('div', 'what');
+      const people = list(e.people);
+      if (people.length) { const pp = mk('div', 'people'); for (const p of people) pp.append(mk('span', 'chip', p)); what.append(pp); }
+      what.append(mk('h3', null, e.title));
+      for (const it of list(e.items)) {
+        const bq = mk('blockquote');
+        if (it.q) bq.append(mk('p', null, '“' + it.q + '”'));
+        const c = mk('cite');
+        if (it.who) c.append(document.createTextNode(it.who + ' · '));
+        c.append(link(it.cite, it.url));
+        bq.append(c);
+        what.append(bq);
+      }
+      if (e.note) {
+        const n = mk('p', 'note', e.note);
+        if (e.note_cite) { n.append(document.createTextNode(' ')); n.append(link('(' + e.note_cite + ')', e.note_url)); }
+        what.append(n);
+      }
+      ev.append(what);
+      el.append(ev);
+    }
+  });
+
+  dash.draw('othertable', (tb) => {
+    tb.replaceChildren();
+    const rows = ok('non_individual');
+    if (!rows) return;
+    for (const r of rows) {
+      const tr = tb.insertRow(); tr.dataset.key = `${encodeURIComponent(r.date)},${encodeURIComponent(r.name)}`;
+      cell(tr, d3.utcFormat('%b %-d, %Y')(new Date(r.date + 'T00:00:00Z'))); cell(tr, r.name); cell(tr, r.description); cell(tr, money(r.amount), 'n'); linkCell(tr, 'FEC report', r.pdf);
+    }
+  });
+</script>
+</div>
+</body>
+</html>
